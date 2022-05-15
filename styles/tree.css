@@ -1,0 +1,74 @@
+:root {
+  --color: #374151;
+}
+
+.tree {
+  text-align: center;
+}
+
+.tree ul {
+  display: flex;
+  justify-content: center;
+}
+
+.tree ul,
+.tree .tree-branch {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree ul {
+  margin-top: 0.5em;
+}
+
+.tree .tree-branch {
+  padding-top: .5em;
+}
+
+.tree .tree-branch::before {
+  outline: solid 1px var(--color);
+  position: absolute;
+  content: "";
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.tree .tree-branch:first-of-type::before {
+  left: 50%;
+}
+
+.tree .tree-branch:last-of-type::before {
+  right: 50%;
+}
+
+.tree .tree-node {
+  display: inline-block;
+  color: var(--color);
+  position: relative;
+  margin: 0 .2em;
+  z-index: 1;
+}
+
+.tree ul::before,
+.tree .tree-node::before {
+  outline: solid 1px var(--color);
+  position: absolute;
+  height: .5em;
+  content: "";
+  left: 50%;
+}
+
+.tree ul::before {
+  top: -.5em;
+}
+
+.tree .tree-node::before {
+  top: -.50em;
+}
+
+.tree > .tree-branch > li > .tree-node::before {
+  display: none;
+}
