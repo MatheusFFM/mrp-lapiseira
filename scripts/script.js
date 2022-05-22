@@ -10,13 +10,14 @@ document.addEventListener('alpine:init', () => {
       this.setState(this.getOfflineState());
 
       const debounceSave = debounce(() => this.saveOnlineState());
-      const saveState = () => {
+      const handleChanges = () => {
+        this.updateMatrix();
         this.saveOfflineState();
         debounceSave();
       };
 
       ['products', 'productionTree'].forEach(prop => {
-        this.$watch(prop, () => saveState());
+        this.$watch(prop, () => handleChanges());
       });
 
       fetch(apiEndpoint)
@@ -25,15 +26,17 @@ document.addEventListener('alpine:init', () => {
         .finally(() => this.ready = true);
     },
 
-    setState({ products, productionTree }) {
+    setState({ products, productionTree, matrix }) {
       this.products = structuredClone(products);
       this.productionTree = structuredClone(productionTree);
+      this.matrix = structuredClone(matrix);
+
       this.refs = getRefs(this.productionTree);
     },
 
     getOfflineState() {
       return JSON.parse(localStorage.getItem('data')) ?? {
-        products, productionTree,
+        products, productionTree, matrix,
       };
     },
 
@@ -41,6 +44,7 @@ document.addEventListener('alpine:init', () => {
       localStorage.setItem('data', JSON.stringify({
         products: this.products,
         productionTree: this.productionTree,
+        matrix: this.matrix,
       }));
     },
 
@@ -53,12 +57,13 @@ document.addEventListener('alpine:init', () => {
         body: JSON.stringify({
           products: this.products,
           productionTree: this.productionTree,
+          matrix: this.matrix,
         }),
       });
     },
 
     reset() {
-      this.setState({ products, productionTree });
+      this.setState({ products, productionTree, matrix });
     },
 
     getQuantity(key) {
@@ -74,6 +79,20 @@ document.addEventListener('alpine:init', () => {
       }
 
       event.target.textContent = obj[key];
+    },
+
+    updateMatrix() {
+      const matrix = JSON.parse(JSON.stringify(Object.assign({}, this.matrix)));
+
+      for (const product in matrix) {
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 8; j++) {
+            matrix[product][i][j] = Math.floor(Math.random() * 5) + 1;
+          }
+        }
+      }
+
+      this.matrix = matrix;
     },
   }));
 });

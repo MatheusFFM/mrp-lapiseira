@@ -11,10 +11,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 550,
-    matrix: [
-      [200, 200, 800, 1200, 400, 1200, 1200, 200],
-      ...Array.from(Array(4), _ => Array(8).fill(0)),
-    ],
   },
   corpoExterno207: {
     name: 'Corpo externo 207',
@@ -23,7 +19,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   presilhaDeBolso: {
     name: 'Presilha de bolso',
@@ -32,7 +27,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   miolo207: {
     name: 'Miolo 207',
@@ -41,7 +35,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   corpoDaPonteira: {
     name: 'Corpo da ponteira',
@@ -50,7 +43,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   guiaDaPonteira: {
     name: 'Guia da ponteira',
@@ -59,7 +51,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   tampa: {
     name: 'Tampa',
@@ -68,7 +59,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   plasticoABS: {
     name: 'Plástico ABS',
@@ -77,7 +67,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   coranteAzul: {
     name: 'Corante azul',
@@ -86,7 +75,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   tira1mm: {
     name: 'Tira 0,1 mm',
@@ -95,7 +83,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   borracha: {
     name: 'Borracha',
@@ -104,7 +91,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   capaDaBorracha: {
     name: 'Capa da borracha',
@@ -113,7 +99,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   mioloInterno207: {
     name: 'Miolo interno 207',
@@ -122,7 +107,6 @@ const products = {
     leadTime: 3,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   grafite7mm: {
     name: 'Grafite 0,7 mm',
@@ -131,7 +115,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   fioDeBorracha: {
     name: 'Fio de borracha',
@@ -140,7 +123,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   mola: {
     name: 'Mola',
@@ -149,7 +131,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   corpoDoMiolo: {
     name: 'Corpo do miolo',
@@ -158,7 +139,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   suporteDaGarra: {
     name: 'Suporte da garra',
@@ -167,7 +147,6 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   capaDaGarra: {
     name: 'Capa da garra',
@@ -176,7 +155,6 @@ const products = {
     leadTime: 3,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   garras: {
     name: 'Garras',
@@ -185,7 +163,6 @@ const products = {
     leadTime: 1,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
   corantePreto: {
     name: 'Corante preto',
@@ -194,6 +171,5 @@ const products = {
     leadTime: 2,
     safetyStock: 0,
     initialStock: 0,
-    matrix: Array.from(Array(5), _ => Array(8).fill(0)),
   },
 };

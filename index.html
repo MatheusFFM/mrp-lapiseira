@@ -11,6 +11,7 @@
   <script defer src="scripts/components.js"></script>
   <script src="scripts/products.js"></script>
   <script src="scripts/productionTree.js"></script>
+  <script src="scripts/matrix.js"></script>
   <script src="scripts/script.js"></script>
   <title>Projeto MRP</title>
 </head>
@@ -124,7 +125,7 @@
               <td x-text="n" class="border"></td>
             </template>
           </tr>
-          <template x-for="(row, i) in product.matrix" :key="i">
+          <template x-for="(row, i) in matrix[key]" :key="i">
             <tr>
               <template x-for="(col, j) in row" :key="j">
                 <td x-text="col" class="border"></td>
