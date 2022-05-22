@@ -81,15 +81,88 @@ document.addEventListener('alpine:init', () => {
       event.target.textContent = obj[key];
     },
 
-    updateMatrix() {
-      const matrix = JSON.parse(JSON.stringify(Object.assign({}, this.matrix)));
+    initTree(productName, matrix) {
+      const productMatrix = matrix[productName]
+      const needsIndex = 0;
+      const needs = productMatrix[needsIndex];
+      const baseNeeds = matrix['lapiseiraP207'][needsIndex];
+      const treeQuantity = this.findQuantity(this.productionTree, productName, 1);
+      for(const index in needs) {
+        needs[index] = baseNeeds[index] * treeQuantity;
+      }
+    },
 
-      for (const product in matrix) {
-        for (let i = 0; i < 5; i++) {
-          for (let j = 0; j < 8; j++) {
-            matrix[product][i][j] = Math.floor(Math.random() * 5) + 1;
+    findQuantity(product, productName, sum) {
+      if (product.product === productName) {
+        return sum * product.quantity;
+      } else {
+        for(const input of product.inputs) {
+          const result = this.findQuantity(input, productName, sum);
+          if(result !== sum) {
+            return result * product.quantity;
           }
         }
+        return sum;
+      }
+    },
+
+    clearMatrix(productName, matrix) {
+      for(let i = 1; i < matrix[productName].length; i++) {
+        matrix[productName][i] = Array(8).fill(0);
+      }
+    },
+
+    calcMrp(productName, product, matrix) {
+      let stock = product.initialStock;
+      const productMatrix = matrix[productName]
+      const needs = productMatrix[0];
+      const projectedStock = productMatrix[2];
+      const receivingPlannedOrders = productMatrix[3];
+      const releasePlannedOrders = productMatrix[4];
+      
+      for (const cycle in needs) {
+        stock -= needs[cycle];
+
+        if(cycle == 0 && stock < product.minimumLot) {
+          let lotToStart = product.minimumLot;
+
+          while(stock + lotToStart < product.safetyStock) {
+            lotToStart += product.minimumLot;
+          }
+
+          receivingPlannedOrders[cycle] = lotToStart;
+        }
+
+        stock += receivingPlannedOrders[cycle];
+
+        if(stock < product.safetyStock) {
+          cyleToRelease = cycle - product.leadTime;
+
+          if(cyleToRelease >= 0) {
+            let lotToRelease = product.minimumLot;
+
+            while(stock + lotToRelease < product.safetyStock) {
+              lotToRelease += product.minimumLot;
+            }
+
+            releasePlannedOrders[cyleToRelease] = lotToRelease;
+            receivingPlannedOrders[cycle] = lotToRelease;
+            stock += lotToRelease;
+          };
+
+        };
+
+        projectedStock[cycle] = stock; 
+      }
+    },
+
+    updateMatrix() {
+      const matrix = JSON.parse(JSON.stringify(Object.assign({}, this.matrix)));
+      
+      for (const productName in matrix) {
+        this.initTree(productName, matrix)
+        this.clearMatrix(productName, matrix);
+        this.calcMrp(productName, this.products[productName], matrix);
       }
 
       this.matrix = matrix;
