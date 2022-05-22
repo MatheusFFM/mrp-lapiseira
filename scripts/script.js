@@ -121,7 +121,6 @@ document.addEventListener('alpine:init', () => {
       const releasePlannedOrders = productMatrix[4];
       
       for (const cycle in needs) {
-        debugger
         stock -= needs[cycle];
 
         if(cycle == 0 && stock < product.safetyStock) {
