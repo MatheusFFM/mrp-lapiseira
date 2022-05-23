@@ -122,8 +122,9 @@ document.addEventListener('alpine:init', () => {
       
       for (const cycle in needs) {
         stock -= needs[cycle];
+        const cyleToRelease = cycle - product.leadTime;
 
-        if(cycle == 0 && stock < product.safetyStock) {
+        if(Number.parseInt(cycle) <= product.leadTime && stock < product.safetyStock) {
           let lotToStart = product.minimumLot;
 
           while(stock + lotToStart < product.safetyStock) {
@@ -131,12 +132,16 @@ document.addEventListener('alpine:init', () => {
           }
 
           receivingPlannedOrders[cycle] = lotToStart;
+
+          if(cyleToRelease >= 0) {
+            releasePlannedOrders[cyleToRelease] = lotToStart;
+          }
+          
         }
 
         stock += receivingPlannedOrders[cycle];
 
         if(stock < product.safetyStock) {
-          cyleToRelease = cycle - product.leadTime;
 
           if(cyleToRelease >= 0) {
             let lotToRelease = product.minimumLot;
